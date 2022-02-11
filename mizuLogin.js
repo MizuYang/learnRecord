@@ -27,9 +27,6 @@ const app = createApp({
                     this.user.username = '';
                     this.user.password = '';
                 })
-        },
-        backPage(){
-            window.location = 'record.html';
         }
     }
 })
