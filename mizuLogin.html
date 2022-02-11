@@ -21,22 +21,22 @@
                         登入頁面
                     </h1>
                     <div class="col-8">
-                        <form id="form" class="form-signin" @submit.prevent="login">
+                        <form id="form" class="form-signin" >
                             <div class="form-floating mb-3">
                                 <input type="email" class="form-control" id="username" placeholder="name@example.com"
-                                    v-model="user.username" required autofocus >
+                                     required autofocus value="直接按登入就好">
                                 <label for="username">Email address</label>
                             </div>
                             <div class="form-floating">
                                 <input type="password" class="form-control" id="password" placeholder="Password"
-                                    required v-model="user.password">
+                                    required value="1232134">
                                 <label for="password">Password</label>
                             </div>
-                            <button class="btn btn-lg btn-primary w-100 mt-3" type="submit">
+                            <button class="btn btn-lg btn-primary w-100 mt-3" type="button" @click="login">
                                 登入
                             </button>
                             <button class="btn btn-lg btn-secondary w-100 mt-3" type="button" @click="backPage">
-                                回上一頁
+                                回到上一頁
                             </button>
                         </form>
                     </div>
