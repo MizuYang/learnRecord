@@ -16,11 +16,13 @@ const app = createApp({
                 learnTime: '',
                 learnItem: [],
                 today: '',
-                images:[]
+                images:[],
+                todoContent: [],
             },
             products: [],
             disabled:true,
             password:'',
+            todoContent: '',
         }
     },
     // components:{
@@ -62,9 +64,10 @@ const app = createApp({
             const url = `${this.url}/api/${this.path}/admin/products`
             axios.get(url)
                 .then((res) => {
-                    console.log(res.data.products);
+                    console.log(res.data);
                     this.products = res.data.products;
-                    console.log(this.products);
+                    // this.todoContent = res.data.products.todoContent;
+                    // console.log(this.disabled);
                 })
                 .catch((err) => {
                     alert(err.data.message);
@@ -95,7 +98,7 @@ const app = createApp({
             const second = date.getSeconds();
             let weekDay = date.getDay();
             if(weekDay === 0){
-                weekDay === '日'
+                weekDay = '日'
             }else if(weekDay === 1){
                 weekDay = '一'
             }else if(weekDay === 2){
@@ -118,7 +121,12 @@ const app = createApp({
             }else{
                 this.disabled = true
             }
-        }
+        },
+        //* 新增學習內容
+        add_todo(){
+            this.data.todoContent.push(this.$refs.todoContent.value);
+            this.$refs.todoContent.value = '';
+        },
     },
     mounted() {
         // //* 將儲存在 cookie 的 token 取出

@@ -12,12 +12,6 @@
 <body>
   <div id="app">
     <div class="container mt-5">
-
-
-
-
-
-
       <div class="container">
         <ul class="nav ">
           <li class="nav-item">
@@ -35,13 +29,14 @@
         </ul>
       </div>
 
-      
+
       <div class="container d-flex mt-5">
         <div class="d-flex">
           <div class="me-5">
             <label for="learnItem" class="mb-1">選擇學習項目</label>
             <br>
-            <select class="" multiple size='5' aria-label="Default select example" id="learnItem" v-model="data.learnItem">
+            <select class="" multiple size='5' aria-label="Default select example" id="learnItem"
+              v-model="data.learnItem">
               <option value="Vue">Vue</option>
               <option value="HTML">HTML</option>
               <option value="CSS">CSS</option>
@@ -57,39 +52,47 @@
           </div>
           <div>
 
-            
-                <div>
-                  <div class="mb-1" v-for="(image, key) in data.images"> 
-                    <div class="mb-3">
-                      <label for="moreImageUrl" class="form-label">圖片網址</label>
-                      <input  type="text" class="form-control" v-model="data.images[key]"
-                        placeholder="請輸入圖片連結" id="moreImageUrl">
-                    </div>
-                    <img class="img-fluid" >
-                  </div>
-                  <div
-                    >
-                    <button class="btn btn-outline-primary btn-sm d-block w-100"
-                      @click="data.images.push('')">
-                      新增圖片
-                    </button>
-                  </div>
-                  <div >
-                    <button class="btn btn-outline-danger btn-sm d-block w-100" @click="data.images.pop()">
-                      刪除圖片
-                    </button>
-                  </div>
+
+            <div>
+              <div class="mb-1" v-for="(image, key) in data.images">
+                <div class="mb-3">
+                  <label for="moreImageUrl" class="form-label">圖片網址</label>
+                  <input type="text" class="form-control" v-model="data.images[key]" placeholder="請輸入圖片連結"
+                    id="moreImageUrl">
                 </div>
-
-
+                <img class="img-fluid">
+              </div>
+              <div>
+                <button class="btn btn-outline-primary btn-sm d-block w-100" @click="data.images.push('')">
+                  新增圖片
+                </button>
+              </div>
+              <div>
+                <button class="btn btn-outline-danger btn-sm d-block w-100" @click="data.images.pop()">
+                  刪除圖片
+                </button>
+              </div>
+            </div>
           </div>
-
+          <div class="ms-5">
+            <label for="todo" class="me-2">輸入學習內容：</label>
+            <input type="text" id="todo" placeholder="請輸入學習內容" ref="todoContent">
+            <br>
+            <input type="button" value="新增內容" @click="add_todo">
+          </div>
+        </div>
+        <div class="ms-5">
+          <h4>學習內容預覽</h4>
+          <ul class="list-unstyled">
+            <li v-for="todo in data.todoContent">{{ todo }}</li>
+           
+          </ul>
         </div>
 
       </div>
 
 
-      
+
       <div class="container">
         <div class="row py-3">
           <div class="col-md-6">
@@ -100,23 +103,23 @@
                   <th width="120">
                     學習項目
                   </th>
-  
+
                   <th width="150">
                     學習時間(小時)
                   </th>
                   <th width="120">
                     查看細節
                   </th>
-  
+
                 </tr>
               </thead>
               <tbody>
-                <tr  v-for="item in products" :key="item +'1'">
-                  <td width="150" >{{ item.today}}</td>
+                <tr v-for="item in products" :key="item +'1'">
+                  <td width="150">{{ item.today}}</td>
                   <td width="120">
                     {{ item.learnItem }}
                   </td>
-  
+
                   <td width="150">
                     {{ item.learnTime }}
                   </td>
@@ -124,9 +127,10 @@
                     <button type="button" class="btn btn-primary" @click="temp = item">內容</button>
                   </td>
                   <td width="100">
-                      <button type="button" class="btn btn-danger" @click="delProduct(item.id)" :class="{ disabled:disabled}">
-                        刪除
-                      </button>
+                    <button type="button" class="btn btn-danger" @click="delProduct(item.id)"
+                      :class="{ disabled:disabled}">
+                      刪除
+                    </button>
                   </td>
                 </tr>
               </tbody>
@@ -143,21 +147,28 @@
       <br>
       學習時間為：{{ temp.learnTime }} 個小時。
       <br>
+      <ul v-if="temp.todoContent" class="list-unstyled">
+        <li v-for="tempTodo in temp.todoContent">
+          {{ tempTodo }}
+        </li>
+      </ul>
+
+      <br>
       <template v-for="(img,i) in temp.images" :key="i">
         <img :src="img" alt="" class="images m-2 fluid" height="1350">
       </template>
     </div>
 
-    
+
   </div>
 
 
 
-<style>
-  *{
-    outline: 1px solid;
-  }
-</style>
+  <style>
+    * {
+      outline: 1px solid;
+    }
+  </style>
 
 
 

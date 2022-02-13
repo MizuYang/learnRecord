@@ -68,8 +68,15 @@
       <br>
       <strong><span class="text-danger">學習時間為：</span> <span class="text-primary">{{ temp.learnTime }}個小時。</span> </strong> 
       <br>
+      <ul v-if="temp.todoContent" class="list-unstyled">
+        <li v-for="tempTodo in temp.todoContent" class="text-secondary">
+          <strong>  {{ tempTodo }} </strong>
+        </li>
+      </ul>
+      <br>
+
       <template v-for="(img,i) in temp.images" :key="i">
-        <img :src="img" alt="" class="images m-2 fluid" height="1350">
+        <img :src="img" alt="" class="images m-2 fluid" height="750">
       </template>
     </div>
     </div>
