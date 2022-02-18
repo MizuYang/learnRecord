@@ -35,11 +35,10 @@
           <div class="me-5">
             <label for="learnItem" class="mb-1">選擇學習項目</label>
             <br>
-            <select class="" multiple size='5' aria-label="Default select example" id="learnItem"
+            <select class=""   aria-label="Default select example" id="learnItem"
               v-model="data.learnItem">
-              <option value="Vue">Vue</option>
-              <option value="HTML">HTML</option>
-              <option value="CSS">CSS</option>
+              <option value="Vue" >Vue</option>
+              <option value="HTML、CSS">HTML、CSS</option>
               <option value="BootStrap">BootStrap</option>
               <option value="JavaScript">JavaScript</option>
             </select>
@@ -53,14 +52,13 @@
           <div>
 
 
-            <div>
+            <div class=" p-5">
               <div class="mb-1" v-for="(image, key) in data.images">
-                <div class="mb-3">
+                <div>
                   <label for="moreImageUrl" class="form-label">圖片網址</label>
                   <input type="text" class="form-control" v-model="data.images[key]" placeholder="請輸入圖片連結"
                     id="moreImageUrl">
                 </div>
-                <img class="img-fluid">
               </div>
               <div>
                 <button class="btn btn-outline-primary btn-sm d-block w-100" @click="data.images.push('')">
@@ -82,7 +80,7 @@
           </div>
         </div>
         <div class="ms-5">
-          <h4>學習內容預覽</h4>
+          <h4>學習內容預覽：</h4>
           <ul class="list-unstyled">
             <li v-for="todo in data.todoContent">{{ todo }}</li>
            
@@ -117,7 +115,7 @@
                 <tr v-for="item in products" :key="item +'1'">
                   <td width="150">{{ item.today}}</td>
                   <td width="120">
-                    {{ item.learnItem }}
+                    <template v-for="tempLearn in item.learnItem"> {{ tempLearn }} </template>
                   </td>
 
                   <td width="150">
@@ -143,7 +141,8 @@
     <div v-if="temp.today" class="container">
       日期：{{ temp.today}}
       <br>
-      今天學習的項目有： {{ temp.learnItem }}
+      今天學習的項目有： 
+      <template v-for="tempLen in temp.learnItem"> {{ tempLen }} </template>
       <br>
       學習時間為：{{ temp.learnTime }} 個小時。
       <br>

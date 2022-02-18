@@ -23,54 +23,90 @@
       <div class="container">
         <div class="row py-3">
           <div>
-            <table class="table table-hover table-bordered table-striped mt-4">
+            <table class="table table-hover table-bordered table-striped mt-4 text-center">
               <thead>
                 <tr>
                   <th width="150">日期</th>
                   <th width="120">
                     學習項目
                   </th>
-  
+
                   <th width="150">
                     學習時間(小時)
                   </th>
                   <th width="120">
                     查看細節
                   </th>
-  
+
                 </tr>
               </thead>
               <tbody>
-                <tr  v-for="item in products" :key="item +'1'">
-                  <td width="150" >{{ item.today}} </span></td>
+                <tr v-for="item in products" :key="item +'1'">
+                  <td width="150" class="text-start">{{ item.today}} </span></td>
                   <td width="120">
-                    {{ item.learnItem }} <span class="text-danger"> </span>
+                    <!-- {{ item.learnItem }} -->
+                    <template v-for=" learnItem in item.learnItem"> {{ learnItem }} </template>
                   </td>
-  
+
                   <td width="150">
-                    {{ item.learnTime }} <span class="text-danger"> </span>
+                    {{ item.learnTime }}
                   </td>
                   <td width="120">
                     <button type="button" class="btn btn-primary" @click="temp = item">內容</button>
                   </td>
-                  
+
                 </tr>
               </tbody>
             </table>
           </div>
         </div>
       </div>
+
+            <!-- 分頁 -->
+            <nav aria-label="Page navigation example">
+              <ul class="pagination justify-content-center">
+                <li class="page-item" :class="{ disabled: !pagination.has_pre }" >
+                  <a class="page-link" href="#" aria-label="Previous" @click.prevent="getProducts(pagination.current_page - 1)">
+                    <span aria-hidden="true">&laquo;</span>
+                  </a>
+                </li>
+
+                <li class="page-item"  v-for="pages in pagination.total_pages" :key="pages">
+                  <a class="page-link" href="#" @click.prevent="getProducts(pages)"> {{ pages }} </a>
+                </li>
+
+                <li class="page-item" :class="{ disabled: !pagination.has_next }">
+                  <a class="page-link" href="#" aria-label="Next" @click.prevent="getProducts(pagination.current_page + 1)">
+                    <span aria-hidden="true">&raquo;</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+    
     </div>
+
+
+    
+
+
+
+    <!-- 內容內容 -->
     <div v-if="temp.today" class="container">
-      <strong> <span class="text-danger">日期：</span> <span class="text-primary">{{ temp.today}}</span></strong> 
+      <strong> <span class="text-danger">日期：</span> <span class="text-primary">{{ temp.today}}</span></strong>
       <br>
-      <strong><span class="text-danger">今天學習的項目有：</span> <span class="text-primary"> {{ temp.learnItem }}</span></strong> 
+      <strong><span class="text-danger">今天學習的項目有：</span>
+        <span class="text-primary"> <template v-for="tempLen in temp.learnItem"> {{ tempLen }}
+          </template></span></strong>
       <br>
-      <strong><span class="text-danger">學習時間為：</span> <span class="text-primary">{{ temp.learnTime }}個小時。</span> </strong> 
+      <strong><span class="text-danger">學習時間為：</span> <span class="text-primary">{{ temp.learnTime }}個小時。</span>
+      </strong>
       <br>
+
+      <!-- 學習狀況回報 -->
+      <hr>
       <ul v-if="temp.todoContent" class="list-unstyled">
         <li v-for="tempTodo in temp.todoContent" class="text-secondary">
-          <strong>  {{ tempTodo }} </strong>
+          <strong> {{ tempTodo }} </strong>
         </li>
       </ul>
       <br>
@@ -79,17 +115,17 @@
         <img :src="img" alt="" class="images m-2 fluid" height="750">
       </template>
     </div>
-    </div>
+  </div>
   </div>
 
 
-<style>
-  *{
-    font-size: 20px;
-  }
-</style>
+  <style>
+    * {
+      font-size: 20px;
+    }
+  </style>
 
-  
+
 
 
 
